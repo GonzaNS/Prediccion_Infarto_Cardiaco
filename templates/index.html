@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Formulario de Predicción de ENFERMEDADCARDIACA</title>
+
+</head>
+
+<body>
+
+    <div class="titulo-formulario">
+        <h1>Formulario para la Predicción de Enfermedad Cardíaca</h1>
+    </div>
+
+    <div class="contenido-principal">
+
+        <form method="POST" action="/predict">
+
+            <!-- Género -->
+            <div class="input-container">
+                <label for="Genero">Género</label>
+                <div class="input-with-tooltip">
+                    <select id="Genero" name="Genero" required>
+                        <option value="" disabled selected>Selecciona su género</option>
+                        <option value="0">Femenino</option>
+                        <option value="1">Masculino</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Edad -->
+            <div class="input-container">
+                <label for="Edad">Edad</label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="Edad" name="Edad" min="1" placeholder="Ingrese su edad en años" required>
+
+                </div>
+            </div>
+
+            <!-- Educación -->
+            <div class="input-container">
+                <label for="Educacion">Educación</label>
+                <div class="input-with-tooltip">
+                    <select id="Educacion" name="Educacion" required>
+                        <option value="" disabled selected>Seleccione el nivel más alto de educación alcanzado</option>
+                        <option value="0">Sin Educación</option>
+                        <option value="1">Educación primaria</option>
+                        <option value="2">Educación universitaria</option>
+                        <option value="3">Estudios de posgrado</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Fumador actual -->
+            <div class="input-container">
+                <label for="Fumador_actual">Fumador</label>
+                <div class="input-with-tooltip">
+                    <select id="Fumador_actual" name="Fumador_actual" required>
+                        <option value="" disabled selected>Indique si actualmente es fumador</option>
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Cigarros por día -->
+            <div class="input-container">
+                <label for="Cigarros_por_dia">Cantidad de Cigarros</label>
+                <div class="input-with-tooltip">
+                    <input type="number" step="any" id="Cigarros_por_dia" name="Cigarros_por_dia" min="1"
+                        placeholder="Indique cuántos cigarrillos fuma al día" required>
+                </div>
+            </div>
+
+            <!-- PAM -->
+            <div class="input-container">
+                <label for="PAM">PAM</label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="PAM" name="PAM" placeholder="Ingrese su presión arterial media " required>
+                </div>
+            </div>
+
+            <!-- ACV prevalente -->
+            <div class="input-container">
+                <label for="ACV_prevalente">ACV prevalente</label>
+                <div class="input-with-tooltip">
+                    <select id="ACV_prevalente" name="ACV_prevalente" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- HTA prevalente -->
+            <div class="input-container">
+                <label for="HTA_prevalente">HTA prevalente</label>
+                <div class="input-with-tooltip">
+                    <select id="HTA_prevalente" name="HTA_prevalente" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Diabetes -->
+            <div class="input-container">
+                <label for="Diabetes">Diabetes</label>
+                <div class="input-with-tooltip">
+                    <select id="Diabetes" name="Diabetes" required>
+                        <option value="" disabled selected> Antecedesntes O actualmente????</option>
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Colesterol -->
+            <div class="input-container">
+                <label for="Colesterol"> Nivel de Colesterol </label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="Colesterol" name="Colesterol"
+                        placeholder="Ingrese el nivel de colesterol en mg/dL" required>
+                </div>
+            </div>
+
+            <!-- PAS -->
+            <div class="input-container">
+                <label for="PAS">PAS</label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="PAS" name="PAS" required>
+                </div>
+            </div>
+
+            <!-- PAD -->
+            <div class="input-container">
+                <label for="PAD">PAD</label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="PAD" name="PAD" required>
+                </div>
+            </div>
+
+            <!-- IMC -->
+            <div class="input-container">
+                <label for="IMC">IMC</label>
+                <div class="input-with-tooltip">
+                    <input type="number" step="any" id="IMC" name="IMC" required>
+                </div>
+            </div>
+
+            <!-- FC -->
+            <div class="input-container">
+                <label for="FC">Frecuencia Cardiaca</label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="FC" name="FC" placeholder="Ingrese sus latidos por minuto" required>
+                </div>
+            </div>
+
+            <!-- Glucosa -->
+            <div class="input-container">
+                <label for="Glucosa"> Nivel de Glucosa </label>
+                <div class="input-with-tooltip">
+                    <input type="number" id="Glucosa" name="Glucosa" placeholder="Ingrese su nivel de glucosa en mg/dL"
+                        required>
+                </div>
+            </div>
+
+            <button type="submit">Predecir</button>
+        </form>
+
+
+        {% if prediccion is not none %}
+        <div class="resultado-container">
+            <h2>Resultado de la Predicción:</h2>
+            <div class="resultado-card {{ 'positivo' if prediccion == 1 else 'negativo' }}">
+                <p><strong>Predicción:</strong>
+                    {% if prediccion == 1 %}
+                    <span class="positivo">Positivo para Enfermedad Cardiaca</span>
+                    {% else %}
+                    <span class="negativo">Negativo para Enfermedad Cardiaca</span>
+                    {% endif %}
+                </p>
+                <p><strong>Probabilidad de tener enfermedad cardíaca:</strong> {{ prob_cardio }}%</p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fumadorSelect = document.getElementById("Fumador_actual");
+            const cigarrosInput = document.getElementById("Cigarros_por_dia");
+
+            fumadorSelect.addEventListener("change", function () {
+                if (fumadorSelect.value === "0") {
+                    cigarrosInput.value = 0;
+                    cigarrosInput.readOnly = true; // ✅ Esto permite enviar el campo
+                } else if (fumadorSelect.value === "1") {
+                    cigarrosInput.value = "";
+                    cigarrosInput.readOnly = false;
+                }
+            });
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>
