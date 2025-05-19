@@ -5,217 +5,257 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Formulario de Predicción de ENFERMEDADCARDIACA</title>
+    <title>Evaluación Predictiva de Infarto Cardíaco</title>
 
 </head>
 
 <body>
 
-    <div class="titulo-formulario">
-        <h1>Formulario para la Predicción de Enfermedad Cardíaca</h1>
-    </div>
-
     <div class="contenido-principal">
 
         <form method="POST" action="/predict">
+            <h1>Evaluación Predictiva de Infarto Cardíaco</h1>
 
-            <!-- Género -->
-            <div class="input-container">
-                <label for="Genero">Género</label>
-                <div class="input-with-tooltip">
-                    <select id="Genero" name="Genero" required>
-                        <option value="" disabled selected>Selecciona su género</option>
-                        <option value="0">Femenino</option>
-                        <option value="1">Masculino</option>
-                    </select>
+            <div class="fila-formulario">
+                <div class="columna-izquierda">
+                    <!-- Género -->
+                    <div class="pregunta-binaria">
+                        <p class="texto-pregunta">¿Cuál es su género?</p>
+                        <table class="tabla-opciones">
+                            <tr>
+                                <td>
+                                    <input type="radio" id="genero-femenino" name="Genero" value="0" required>
+                                    <label for="genero-femenino" class="opcion-radio">Femenino</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="genero-masculino" name="Genero" value="1">
+                                    <label for="genero-masculino" class="opcion-radio">Masculino</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
+                    <!-- Presión Arterial Media (ahora binaria) -->
+                    <div class="pregunta-binaria">
+                        <p class="texto-pregunta">¿Revisó su presión arterial?</p>
+                        <table class="tabla-opciones">
+                            <tr>
+                                <td>
+                                    <input type="radio" id="pam-no" name="PAM" value="0" required>
+                                    <label for="pam-no" class="opcion-radio">No</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="pam-si" name="PAM" value="1">
+                                    <label for="pam-si" class="opcion-radio">Sí</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="columna-derecha">
+
+                    <!-- Edad -->
+                    <div class="input-container">
+                        <label for="Edad">Edad</label>
+                        <input type="number" id="Edad" name="Edad" min="1" placeholder="Edad en años(32-70)" required>
+                    </div>
+
+                    <!-- Educación -->
+                    <div class="input-container">
+                        <label for="Educacion">Educación</label>
+                        <select id="Educacion" name="Educacion" required>
+                            <option value="" disabled selected>¿Nivel de educación alcanzado?
+                            </option>
+                            <option value="0">Sin Educación</option>
+                            <option value="1">Educación primaria</option>
+                            <option value="2">Educación universitaria</option>
+                            <option value="3">Estudios de posgrado</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <!-- Edad -->
-            <div class="input-container">
-                <label for="Edad">Edad</label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="Edad" name="Edad" min="1" placeholder="Ingrese su edad en años" required>
 
+            <div class="fila-formulario">
+                <div class="columna-izquierda">
+                    <!-- Fumador actual -->
+                    <div class="pregunta-binaria">
+                        <p class="texto-pregunta">¿Actualmente es fumador?</p>
+                        <table class="tabla-opciones">
+                            <tr>
+                                <td>
+                                    <input type="radio" id="fumador-no" name="Fumador_actual" value="0" required />
+                                    <label for="fumador-no" class="opcion-radio">No</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="fumador-si" name="Fumador_actual" value="1" />
+                                    <label for="fumador-si" class="opcion-radio">Sí</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="columna-derecha">
+                    <!-- Cigarros por día -->
+                    <div class="input-container">
+                        <label for="Cigarros_por_dia">Cantidad de Cigarros</label>
+                        <input type="number" step="any" id="Cigarros_por_dia" name="Cigarros_por_dia" min="1"
+                            placeholder="Cigarros al día (0 - 20)" required>
+                    </div>
                 </div>
             </div>
 
-            <!-- Educación -->
-            <div class="input-container">
-                <label for="Educacion">Educación</label>
-                <div class="input-with-tooltip">
-                    <select id="Educacion" name="Educacion" required>
-                        <option value="" disabled selected>Seleccione el nivel más alto de educación alcanzado</option>
-                        <option value="0">Sin Educación</option>
-                        <option value="1">Educación primaria</option>
-                        <option value="2">Educación universitaria</option>
-                        <option value="3">Estudios de posgrado</option>
-                    </select>
 
+            <div class="seccion-binarias-restantes">
+                <!-- ACV -->
+                <div class="pregunta-binaria">
+                    <p class="texto-pregunta">¿Ha tenido un ACV?</p>
+                    <table class="tabla-opciones">
+                        <tr>
+                            <td>
+                                <input type="radio" id="acv-no" name="ACV_prevalente" value="0" required>
+                                <label for="acv-no" class="opcion-radio">No</label>
+                            </td>
+                            <td>
+                                <input type="radio" id="acv-si" name="ACV_prevalente" value="1">
+                                <label for="acv-si" class="opcion-radio">Sí</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- HTA -->
+                <div class="pregunta-binaria">
+                    <p class="texto-pregunta">¿Tiene hipertensión?</p>
+                    <table class="tabla-opciones">
+                        <tr>
+                            <td>
+                                <input type="radio" id="hta-no" name="HTA_prevalente" value="0" required>
+                                <label for="hta-no" class="opcion-radio">No</label>
+                            </td>
+                            <td>
+                                <input type="radio" id="hta-si" name="HTA_prevalente" value="1">
+                                <label for="hta-si" class="opcion-radio">Sí</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Diabetes -->
+                <div class="pregunta-binaria">
+                    <p class="texto-pregunta">¿Tiene diabetes?</p>
+                    <table class="tabla-opciones">
+                        <tr>
+                            <td>
+                                <input type="radio" id="diabetes-no" name="Diabetes" value="0" required>
+                                <label for="diabetes-no" class="opcion-radio">No</label>
+                            </td>
+                            <td>
+                                <input type="radio" id="diabetes-si" name="Diabetes" value="1">
+                                <label for="diabetes-si" class="opcion-radio">Sí</label>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
-            <!-- Fumador actual -->
-            <div class="input-container">
-                <label for="Fumador_actual">Fumador</label>
-                <div class="input-with-tooltip">
-                    <select id="Fumador_actual" name="Fumador_actual" required>
-                        <option value="" disabled selected>Indique si actualmente es fumador</option>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
+            <!-- SECCIÓN DE INPUTS NUMÉRICOS (2 COLUMNAS) -->
+            <div class="seccion-inputs">
+                <!-- Columna Izquierda (4 inputs) -->
+                <div class="columna-inputs">
 
+                    <div class="input-container">
+                        <label for="Colesterol">Colesterol (mg/dL)</label>
+                        <input type="number" id="Colesterol" name="Colesterol"
+                            placeholder="Nivel de Colesterol (113-600)" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="PAS">Presión Sistólica (PAS)</label>
+                        <input type="number" id="PAS" name="PAS" placeholder="Pre. Sis.(83.5-295)" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="IMC">Índice de Masa Corporal (IMC)</label>
+                        <input type="number" step="0.1" id="IMC" name="IMC" placeholder="Ind. Mas. (15.5-56.8)"
+                            required>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Cigarros por día -->
-            <div class="input-container">
-                <label for="Cigarros_por_dia">Cantidad de Cigarros</label>
-                <div class="input-with-tooltip">
-                    <input type="number" step="any" id="Cigarros_por_dia" name="Cigarros_por_dia" min="1"
-                        placeholder="Indique cuántos cigarrillos fuma al día" required>
-                </div>
-            </div>
+                <!-- Columna Derecha (3 inputs) -->
+                <div class="columna-inputs">
+                    <div class="input-container">
+                        <label for="PAD">Presión Diastólica (PAD)</label>
+                        <input type="number" id="PAD" name="PAD" placeholder="Pre. Dia. (48-143)" required>
+                    </div>
 
-            <!-- PAM -->
-            <div class="input-container">
-                <label for="PAM">PAM</label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="PAM" name="PAM" placeholder="Ingrese su presión arterial media " required>
-                </div>
-            </div>
+                    <div class="input-container">
+                        <label for="FC">Frecuencia Cardíaca (FC)</label>
+                        <input type="number" id="FC" name="FC" placeholder="Latidos por minuto (44-143)" required>
+                    </div>
 
-            <!-- ACV prevalente -->
-            <div class="input-container">
-                <label for="ACV_prevalente">ACV prevalente</label>
-                <div class="input-with-tooltip">
-                    <select id="ACV_prevalente" name="ACV_prevalente" required>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
-
-                </div>
-            </div>
-
-            <!-- HTA prevalente -->
-            <div class="input-container">
-                <label for="HTA_prevalente">HTA prevalente</label>
-                <div class="input-with-tooltip">
-                    <select id="HTA_prevalente" name="HTA_prevalente" required>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
-
-                </div>
-            </div>
-
-            <!-- Diabetes -->
-            <div class="input-container">
-                <label for="Diabetes">Diabetes</label>
-                <div class="input-with-tooltip">
-                    <select id="Diabetes" name="Diabetes" required>
-                        <option value="" disabled selected> Antecedesntes O actualmente????</option>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
-
-                </div>
-            </div>
-
-            <!-- Colesterol -->
-            <div class="input-container">
-                <label for="Colesterol"> Nivel de Colesterol </label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="Colesterol" name="Colesterol"
-                        placeholder="Ingrese el nivel de colesterol en mg/dL" required>
-                </div>
-            </div>
-
-            <!-- PAS -->
-            <div class="input-container">
-                <label for="PAS">PAS</label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="PAS" name="PAS" required>
-                </div>
-            </div>
-
-            <!-- PAD -->
-            <div class="input-container">
-                <label for="PAD">PAD</label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="PAD" name="PAD" required>
-                </div>
-            </div>
-
-            <!-- IMC -->
-            <div class="input-container">
-                <label for="IMC">IMC</label>
-                <div class="input-with-tooltip">
-                    <input type="number" step="any" id="IMC" name="IMC" required>
-                </div>
-            </div>
-
-            <!-- FC -->
-            <div class="input-container">
-                <label for="FC">Frecuencia Cardiaca</label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="FC" name="FC" placeholder="Ingrese sus latidos por minuto" required>
-                </div>
-            </div>
-
-            <!-- Glucosa -->
-            <div class="input-container">
-                <label for="Glucosa"> Nivel de Glucosa </label>
-                <div class="input-with-tooltip">
-                    <input type="number" id="Glucosa" name="Glucosa" placeholder="Ingrese su nivel de glucosa en mg/dL"
-                        required>
+                    <div class="input-container">
+                        <label for="Glucosa">Glucosa (mg/dL)</label>
+                        <input type="number" id="Glucosa" name="Glucosa" placeholder="Niv. glucosa (40-394)" required>
+                    </div>
                 </div>
             </div>
 
             <button type="submit">Predecir</button>
         </form>
 
-
-        {% if prediccion is not none %}
-        <div class="resultado-container">
-            <h2>Resultado de la Predicción:</h2>
-            <div class="resultado-card {{ 'positivo' if prediccion == 1 else 'negativo' }}">
-                <p><strong>Predicción:</strong>
-                    {% if prediccion == 1 %}
-                    <span class="positivo">Positivo para Enfermedad Cardiaca</span>
-                    {% else %}
-                    <span class="negativo">Negativo para Enfermedad Cardiaca</span>
-                    {% endif %}
-                </p>
-                <p><strong>Probabilidad de tener enfermedad cardíaca:</strong> {{ prob_cardio }}%</p>
+        <div>
+            {% if prediccion is not none %}
+            <div class="resultado-container">
+                <h2>Resultado de la Predicción:</h2>
+                <div class="resultado-card {{ 'positivo' if prediccion == 1 else 'negativo' }}">
+                    <p><strong>Predicción:</strong>
+                        {% if prediccion == 1 %}
+                        <span class="positivo">Positivo para Enfermedad Cardiaca</span>
+                        {% else %}
+                        <span class="negativo">Negativo para Enfermedad Cardiaca</span>
+                        {% endif %}
+                    </p>
+                    <p><strong>Probabilidad de tener enfermedad cardíaca:</strong> {{ prob_cardio }}%</p>
+                </div>
             </div>
+            {% endif %}
         </div>
-        {% endif %}
 
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const fumadorSelect = document.getElementById("Fumador_actual");
             const cigarrosInput = document.getElementById("Cigarros_por_dia");
 
-            fumadorSelect.addEventListener("change", function () {
-                if (fumadorSelect.value === "0") {
+            // Obtener ambos radio buttons
+            const radioNo = document.getElementById("fumador-no");
+            const radioSi = document.getElementById("fumador-si");
+
+            // Función para manejar el cambio
+            function manejarFumador() {
+                if (radioNo.checked) {
                     cigarrosInput.value = 0;
-                    cigarrosInput.readOnly = true; // ✅ Esto permite enviar el campo
-                } else if (fumadorSelect.value === "1") {
+                    cigarrosInput.readOnly = true;
+                } else {
                     cigarrosInput.value = "";
                     cigarrosInput.readOnly = false;
                 }
-            });
+            }
+
+            // Escuchar cambios en ambos radios
+            radioNo.addEventListener("change", manejarFumador);
+            radioSi.addEventListener("change", manejarFumador);
+
+            // Ejecutar al cargar por si ya hay un valor seleccionado
+            manejarFumador();
         });
 
     </script>
 
 
+    </div>
 
 </body>
 

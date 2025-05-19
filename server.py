@@ -6,7 +6,7 @@ import joblib
 app = Flask(__name__)
 
 # Cargar modelo y escalador
-modelo = joblib.load('modelo_entrenado.h5')
+modelo = joblib.load('modelo_entrenado.pkl')
 escalador = load_object('scaler.pkl')
 
 
@@ -41,7 +41,6 @@ def predict():
         prediccion = modelo.predict(X_scaled)[0]
 
         probabilidades = modelo.predict_proba(X_scaled)[0]
-        prob_no_cardio = round(probabilidades[0] * 100, 2)
         prob_cardio = round(probabilidades[1] * 100, 2)
 
         return render_template('index.html', prediccion=prediccion, prob_cardio=prob_cardio)

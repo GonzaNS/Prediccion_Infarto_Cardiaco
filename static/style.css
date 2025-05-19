@@ -2,7 +2,6 @@
 
 input,
 select,
-textarea,
 button {
     font-family: 'Poppins', sans-serif;
 }
@@ -10,60 +9,35 @@ button {
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: rgb(60, 103, 112);
     margin: 0;
     padding: 0;
-    background: url('https://www.untels.edu.pe/FTP/2021.05.21.0038_DISE%C3%91O%20PMESUT_WEB.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
-
-/* Capa oscura translúcida encima del fondo */
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Oscurece el fondo */
-    z-index: -1;
-}
-
-.titulo-formulario {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    border-radius: 12px;
-    margin: 20px auto;
-    width: 80%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.titulo-formulario h1 {
-    font-family: 'Poppins', sans-serif;
-    color: #2c3e50;
-    font-size: 28px;
-    margin: 0;
-}
-
 
 .contenido-principal {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
     margin: 20px;
 }
 
 form {
-    max-width: 600px;
-    margin: 40px auto;
+    max-width: 750px;
+    margin: 10px 10px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.95);
     /* Fondo blanco casi opaco */
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+form h1 {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 100%;
 }
 
 label {
@@ -95,7 +69,7 @@ button {
     margin-top: 20px;
     width: 100%;
     padding: 10px;
-    background: #4CAF50;
+    background: #4c93af;
     color: white;
     border: none;
     border-radius: 5px;
@@ -103,15 +77,163 @@ button {
     cursor: pointer;
 }
 
-/*================ENTRADA (INPUT)================*/
+
+/* =============================================  FILAS ============================================= */
+
+.fila-formulario {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 0px;
+    width: 90%;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.columna-izquierda {
+    flex: 1;
+
+    /* Menos espacio para el binario */
+    min-width: 0;
+    align-items: center;
+
+}
+
+
+.columna-derecha {
+    margin-bottom: 40px;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    /* Evita problemas de overflow */
+}
+
+
+
+
+
+/* ============================================= PREGUNTAS BINARIAS ============================================= */
+
+.seccion-binarias-restantes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* 3 columnas fijas */
+    gap: 12px;
+    margin: 12px 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pregunta-binaria {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    max-width: 240px;
+}
+
+.texto-pregunta {
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.tabla-opciones {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+    text-align: center;
+}
+
+.tabla-opciones td {
+    padding: 0;
+    width: 50%;
+}
+
+/* Radio buttons personalizados */
+input[type="radio"] {
+    display: none;
+}
+
+.opcion-radio {
+    display: block;
+    padding: 12px 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Efectos interactivos */
+.opcion-radio:hover {
+    background-color: #e0f3fa;
+}
+
+input[type="radio"]:checked+.opcion-radio {
+    background-color: #a9ddf5;
+    border-color: #0377a6;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .seccion-binarias-restantes {
+        grid-template-columns: 1fr;
+        /* Una columna en móviles */
+    }
+}
+
+
+
+
+
+/* ============================================= INPUTS NUMÉRICOS =============================================*/
+.seccion-inputs {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.columna-inputs {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .seccion-binarias {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-inputs {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+
+
+
+
+/*=============================================ENTRADA (INPUT)=============================================*/
 
 input {
-    width: 100%;
+    width: 70%;
     padding: 8px;
     margin-top: 4px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 input:focus {
@@ -121,32 +243,18 @@ input:focus {
 }
 
 .input-container {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+
 }
 
-
-.input-with-tooltip {
-    display: flex;
-    align-items: center;
+input[readonly] {
+    /*para el cigarro*/
+    background-color: #f0f0f0;
+    cursor: not-allowed;
 }
 
-.input-with-tooltip input {
-    padding-right: 30px;
-    /* espacio para el círculo */
-    width: 500px;
-    padding: 8px;
-    font-size: 14px;
-}
+/* =============================================RESULTADO=============================================*/
 
-/* ================RESULTADO================*/
-
-.resultado {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-}
 
 .resultado-container {
     background-color: rgba(255, 255, 255, 0.1);

@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import ExtraTreesClassifier
@@ -33,11 +32,11 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 print("\nMatriz de confusión:")
 print(pd.DataFrame(confusion_matrix(y_test, y_pred), index=[
-      "No Cardiopatía", "Cardiopatía"], columns=["No Cardiopatía", "Cardiopatía"]))
+      "No Infarto Cardiaco", "Infarto Cardaico"], columns=["No Infarto Cardaico", "Infarto Cardaico"]))
 
 print("\nReporte de clasificación:")
 print(classification_report(y_test, y_pred,
-      target_names=["No Cardiopatía", "Cardiopatía"]))
+      target_names=["Infarto Cardaico", "Infarto Cardaico"]))
 
 # Guardar el modelo
-save_object('modelo_entrenado.h5', model)
+save_object('modelo_entrenado.pkl', model)
