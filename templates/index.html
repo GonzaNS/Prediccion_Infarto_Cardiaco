@@ -346,20 +346,22 @@
 {% endif %}
 
 <!-- Modal para ingresar email -->
+<!-- Modal para ingresar email -->
 <div id="modalEmail" class="modal" style="display:none;">
-  <div class="modal-content">
-    <span id="cerrarModal" class="close">&times;</span>
-    <h3>Enviar resultado por correo</h3>
-    <form id="formEnviarCorreo" method="POST" action="{{ url_for('enviar_correo') }}">
-      <label for="emailDestino">Correo destinatario:</label>
-      <input type="email" id="emailDestino" name="email" required placeholder="ejemplo@correo.com" />
-      <!-- Campos ocultos con resultado y probabilidad -->
-      <input type="hidden" name="resultado" value="{% if prediccion == 1 %}Positivo para Enfermedad Cardiaca{% else %}Negativo para Enfermedad Cardiaca{% endif %}">
-      <input type="hidden" name="probabilidad" value="{{ prob_cardio }}">
-      <button type="submit">Enviar</button>
-    </form>
+    <div class="modal-content">
+      <span id="cerrarModal" class="close">&times;</span>
+      <h3>Enviar resultado por correo</h3>
+      <form id="formEnviarCorreo" method="POST" action="{{ url_for('enviar_correo') }}">
+        <label for="emailDestino">Correo destinatario:</label>
+        <input type="email" id="emailDestino" name="email" class="input-completo" required placeholder="ejemplo@correo.com" />
+        <!-- Campos ocultos con resultado y probabilidad -->
+        <input type="hidden" name="resultado" value="{% if prediccion == 1 %}Positivo para Enfermedad Cardiaca{% else %}Negativo para Enfermedad Cardiaca{% endif %}">
+        <input type="hidden" name="probabilidad" value="{{ prob_cardio }}">
+        <button type="submit" class="btn-completo">Enviar</button>
+      </form>
+    </div>
   </div>
-</div>
+  
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const btnCorreo = document.getElementById('btnCorreoFlotante');

@@ -574,4 +574,32 @@ input[readonly] {
     font-weight: bold;
     user-select: none;
   }
-  
+
+
+
+.input-completo,
+.btn-completo {
+  width: 100%; /* Ambos ocuparán todo el ancho del contenedor */
+  padding: 10px; /* Un poco de padding para mayor comodidad */
+  margin: 5px 0; /* Espacio entre los elementos */
+  box-sizing: border-box; /* Asegura que padding y borde no afecten el ancho */
+}
+
+/* Opcional: Agregar estilos de fondo o bordes para que se vean más similares */
+.input-completo {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-completo {
+  background-color: #4CAF50; /* Verde para el botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-completo:hover {
+  background-color: #45a049; /* Color al pasar el mouse */
+}

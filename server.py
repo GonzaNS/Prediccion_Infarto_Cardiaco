@@ -13,6 +13,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.units import inch
+from twilio.rest import Client
+
 import os
 
 app = Flask(__name__)
@@ -115,6 +117,7 @@ def generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo):
     # Crear el PDF
     doc.build(Story)
     return pdf_path
+
 @app.route('/enviar_correo', methods=['POST'])
 def enviar_correo():
     email_destino = request.form['email']
