@@ -43,11 +43,28 @@ def predict():
         probabilidades = modelo.predict_proba(X_scaled)[0]
         prob_cardio = round(probabilidades[1] * 100, 2)
 
-        return render_template('index.html', prediccion=prediccion, prob_cardio=prob_cardio)
+        # Redondear valores para las recomendaciones
+        datos_recomendaciones = {
+            'Fumador_actual': int(datos['Fumador_actual']),
+            'Cigarros_por_dia': int(datos['Cigarros_por_dia']),
+            'IMC': round(float(request.form['IMC']), 1),
+            'PAS': int(datos['PAS']),
+            'PAD': int(datos['PAD']),
+            'Colesterol': int(datos['Colesterol']),
+            'Glucosa': int(datos['Glucosa']),
+            'Edad': int(datos['Edad']),
+            'Diabetes': int(datos['Diabetes']),
+            'HTA_prevalente': int(datos['HTA_prevalente'])
+        }
+
+        datos_originales = request.form.to_dict()
+
+        return render_template('index.html', prediccion=prediccion, prob_cardio=prob_cardio, datos=datos_recomendaciones, form_data=datos_originales)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    # Cambio clave: host='0.0.0.0'
+    app.run(host='0.0.0.0', port=8000, debug=True)

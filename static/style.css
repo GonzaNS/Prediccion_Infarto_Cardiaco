@@ -24,7 +24,7 @@ body {
 }
 
 form {
-    max-width: 750px;
+    max-width: 700px;
     margin: 10px 10px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.95);
@@ -38,6 +38,28 @@ form h1 {
     margin: 0 auto;
     padding: 10px 0;
     width: 100%;
+}
+
+.disclaimer-medico {
+    background-color: #fff3cd;
+    /* Amarillo claro de advertencia */
+    border-left: 4px solid #ffc107;
+    /* Borde amarillo */
+    padding: 12px 20px;
+    margin: 10px 0 25px 0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #856404;
+    /* Texto oscuro para contraste */
+}
+
+.disclaimer-medico p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.disclaimer-medico strong {
+    font-weight: 600;
 }
 
 label {
@@ -264,6 +286,13 @@ input[readonly] {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+    width: 100%;
+    /* Se ajusta al contenido sin rebasar */
+    max-width: 600px;
+    /* Nunca más ancho que el contenedor padre */
+    box-sizing: border-box;
+    /* Incluye padding en el ancho total */
 }
 
 .resultado-container h2 {
@@ -311,4 +340,178 @@ input[readonly] {
     background-color: rgba(255, 255, 255, 0.1);
     border-left: 6px solid #00a000;
     color: #006000;
+}
+
+
+
+/*=====================================RECOMENDACIONES========================================*/
+
+/* Estilos para la sección de recomendaciones */
+.recomendaciones-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 5px solid #17a2b8;
+
+    /* Aseguramos que no exceda el ancho */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.recomendaciones-container h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.lista-recomendaciones {
+    padding-left: 20px;
+}
+
+.lista-recomendaciones li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.advertencia-riesgo p {
+    font-style: italic;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.frase-motivacional p {
+    font-style: italic;
+    color: #313131;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+
+/*==================================================MOVILES==================================================*/
+/* ==================== MEJORAS PARA MÓVILES (max-width: 768px) ==================== */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        background-color: #3c6770;
+    }
+
+    .contenido-principal {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    form {
+        width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Ajustes para filas/columnas */
+    .fila-formulario {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .columna-izquierda,
+    .columna-derecha {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+
+    /* Preguntas binarias (1 columna) */
+    .seccion-binarias-restantes {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .pregunta-binaria {
+        max-width: 100%;
+        margin: 5px 0;
+        padding: 12px;
+    }
+
+    /* Inputs/selects más grandes */
+    input,
+    select {
+        width: 100% !important;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Botón más destacado */
+    button {
+        padding: 15px;
+        font-size: 18px;
+        margin: 20px auto;
+        max-width: 90%;
+    }
+
+    /* Resultados */
+    .resultado-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 0;
+    }
+
+    /* Recomendaciones */
+    .recomendaciones-container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    /* Opciones de radio más táctiles */
+    .tabla-opciones {
+        width: 100%;
+    }
+
+    .opcion-radio {
+        padding: 14px 5px;
+        font-size: 16px;
+    }
+
+    /* Texto más legible */
+    .texto-pregunta,
+    .input-container label {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        padding: 10px 5px;
+    }
+
+    .disclaimer-medico {
+        font-size: 15px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    /* Añade esto para que el resultado aparezca debajo del formulario */
+    .contenido-principal {
+        flex-direction: column;
+        /* Apila verticalmente (formulario arriba, resultado abajo) */
+    }
+
+    .resultado-container {
+        order: 1;
+        /* Fuerza al resultado a aparecer después del formulario */
+        margin-top: 20px;
+        /* Espacio entre formulario y resultado */
+        width: 100%;
+    }
+
 }

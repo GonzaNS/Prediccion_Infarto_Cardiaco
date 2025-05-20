@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Evaluación Predictiva de Infarto Cardíaco</title>
 
@@ -14,7 +14,11 @@
     <div class="contenido-principal">
 
         <form method="POST" action="/predict">
-            <h1>Evaluación Predictiva de Infarto Cardíaco</h1>
+            <h1>Evaluación Predictiva de Enfermedad Cardiovascular(ECV)</h1>
+            <div class="disclaimer-medico">
+                <p>⚠️ <strong>Importante:</strong> Este test predictivo no sustituye una evaluación médica profesional.
+                    Los resultados son aproximados y deben ser interpretados por un especialista en salud.</p>
+            </div>
 
             <div class="fila-formulario">
                 <div class="columna-izquierda">
@@ -24,11 +28,11 @@
                         <table class="tabla-opciones">
                             <tr>
                                 <td>
-                                    <input type="radio" id="genero-femenino" name="Genero" value="0" required>
+                                    <input type="radio" id="genero-femenino" name="Genero" value="1" required>
                                     <label for="genero-femenino" class="opcion-radio">Femenino</label>
                                 </td>
                                 <td>
-                                    <input type="radio" id="genero-masculino" name="Genero" value="1">
+                                    <input type="radio" id="genero-masculino" name="Genero" value="0">
                                     <label for="genero-masculino" class="opcion-radio">Masculino</label>
                                 </td>
                             </tr>
@@ -202,23 +206,92 @@
                 </div>
             </div>
 
-            <button type="submit">Predecir</button>
+            <div class="botones-formulario">
+                <button type="submit">Predecir</button>
+            </div>
         </form>
 
         <div>
             {% if prediccion is not none %}
             <div class="resultado-container">
-                <h2>Resultado de la Predicción:</h2>
+                <h2>Resultado :</h2>
                 <div class="resultado-card {{ 'positivo' if prediccion == 1 else 'negativo' }}">
                     <p><strong>Predicción:</strong>
                         {% if prediccion == 1 %}
-                        <span class="positivo">Positivo para Enfermedad Cardiaca</span>
+                        <span class="positivo">Alto riesgo para ECV</span>
                         {% else %}
-                        <span class="negativo">Negativo para Enfermedad Cardiaca</span>
+                        <span class="negativo">Bajo riesgo para ECV</span>
                         {% endif %}
                     </p>
-                    <p><strong>Probabilidad de tener enfermedad cardíaca:</strong> {{ prob_cardio }}%</p>
+                    <p><strong>Probabilidad de riesgo:</strong> {{ prob_cardio }}%</p>
                 </div>
+
+                <!-- SECCIÓN DE RECOMENDACIONES -->
+                <div class="recomendaciones-container">
+                    <h2>Recomendaciones para mejorar tu salud cardíaca:</h2>
+                    <ul class="lista-recomendaciones">
+                        {% if prediccion == 1 %}
+                        <!-- ALTO RIESGO -->
+                        <div class="advertencia-riesgo">
+                            <p>⚠️ <strong>¡PELIGRO!</strong> ⚠️</p>
+                            <p>Usted tiene una alta probabilidad de sufrir un infarto o accidente cardiovascular en los
+                                próximos años. No espere a tener síntomas.</p>
+                        </div>
+
+                        <li>Visita un cardiólogo lo más pronto posible Es fundamental que un profesional evalúe tu salud
+                            cardiovascular.</li>
+
+                        {% if datos.IMC and datos.IMC > 25 %}
+                        <li>⁠Te recomendamos disminuir tu peso</li>
+                        {% endif %}
+
+                        <li>⁠Haz al menos 30 minutos de ejercicio aeróbico 5 días a la semana (150 min a la semana) y
+                            añade 2 días de entrenamiento de fuerza.</li>
+
+                        {% if datos.Fumador_actual == 1 %}
+                        <li>Deja el cigarrillo, Fumar está dañando tus arterias y aumenta tu riesgo de ECV.</li>
+                        {% endif %}
+
+                        <li>⁠Lleva un control minucioso de tu presión arterial, la hipertension mal controlada lleva a
+                            eventos cardiovasculares graves.</li>
+
+                        <li>⁠Controla tus enfermedades crónicas (presión arterial, colesterol y glucosa deben mantenerse
+                            en rangos adecuados).</li>
+
+                        <div class="frase-motivacional">
+                            <p>"Mejora tu estilo de vida ahora, no esperes más"</p>
+                        </div>
+
+                        {% else %}
+                        <!-- BAJO RIESGO -->
+                        <div class="advertencia-riesgo">
+                            <p>"No te confíes por un riesgo bajo"</p>
+                        </div>
+
+                        {% if datos.IMC %}
+                        <li>Recuerda que los valores normales del IMC están en el rango 20 -
+                            25 kg/m2 </li>
+                        {% endif %}
+
+                        <li>⁠Haz al menos 30 minutos de ejercicio aeróbico 5 días a la semana (150 min a la semana) y
+                            añade 2 días de entrenamiento de fuerza.</li>
+
+                        {% if datos.Fumador_actual == 1 %}
+                        <li>⁠Evita el cigarrillo, Fumar daña las arterias y aumenta el riesgo de ECV.</li>
+                        {% endif %}
+
+                        <li> ⁠Lleva un control de tu presión arterial, la hipertension mal controlada lleva a eventos
+                            cardiovasculares graves</li>
+
+                        <li> ⁠⁠No olvides tu chequeo medico anual</li>
+
+                        <div class="frase-motivacional">
+                            <p>"Nunca es tarde para mejorar tu estilo de vida"</p>
+                        </div>
+                        {% endif %}
+                    </ul>
+                </div>
+
             </div>
             {% endif %}
         </div>
@@ -250,6 +323,29 @@
 
             // Ejecutar al cargar por si ya hay un valor seleccionado
             manejarFumador();
+
+
+            form.addEventListener("submit", function (event) {
+                // Evita el scroll automático que hace el formulario al enviarse
+                event.preventDefault();
+
+                // Simula el envío del formulario (si usas AJAX o Flask lo manejará igual)
+                this.submit();
+
+                // Solo haz scroll si hay resultados (cuando "prediccion" existe)
+                if (document.querySelector(".resultado-container")) {
+                    setTimeout(function () {
+                        const recomendaciones = document.querySelector(".recomendaciones-container");
+                        if (recomendaciones) {
+                            recomendaciones.scrollIntoView({
+                                behavior: "smooth", // Desplazamiento suave
+                                block: "start"      // Alinea el elemento al inicio de la pantalla
+                            });
+                        }
+                    }, 500); // Pequeño retraso para asegurar que los resultados se hayan cargado
+                }
+            });
+
         });
 
     </script>
