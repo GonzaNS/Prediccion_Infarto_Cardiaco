@@ -62,7 +62,8 @@
                     <!-- Edad -->
                     <div class="input-container">
                         <label for="Edad">Edad</label>
-                        <input type="number" id="Edad" name="Edad" min="1" placeholder="Edad en años(32-70)" required>
+                        <input type="number" id="Edad" name="Edad" min="32" max="70" placeholder="Edad en años(32-70)"
+                            required>
                     </div>
 
                     <!-- Educación -->
@@ -104,8 +105,8 @@
                     <!-- Cigarros por día -->
                     <div class="input-container">
                         <label for="Cigarros_por_dia">Cantidad de Cigarros</label>
-                        <input type="number" step="any" id="Cigarros_por_dia" name="Cigarros_por_dia" min="1"
-                            placeholder="Cigarros al día (0 - 20)" required>
+                        <input type="number" step="any" id="Cigarros_por_dia" min="0" max="20" name="Cigarros_por_dia"
+                            min="1" placeholder="Cigarros al día (0 - 20)" required>
                     </div>
                 </div>
             </div>
@@ -171,19 +172,20 @@
 
                     <div class="input-container">
                         <label for="Colesterol">Colesterol (mg/dL)</label>
-                        <input type="number" id="Colesterol" name="Colesterol"
+                        <input type="number" id="Colesterol" name="Colesterol" min="113" max="600"
                             placeholder="Nivel de Colesterol (113-600)" required>
                     </div>
 
                     <div class="input-container">
                         <label for="PAS">Presión Sistólica (PAS)</label>
-                        <input type="number" id="PAS" name="PAS" placeholder="Pre. Sis.(83.5-295)" required>
+                        <input type="number" id="PAS" name="PAS" placeholder="Pre. Sis.(83-295)" min="83" max="295"
+                            required>
                     </div>
 
                     <div class="input-container">
                         <label for="IMC">Índice de Masa Corporal (IMC)</label>
-                        <input type="number" step="0.1" id="IMC" name="IMC" placeholder="Ind. Mas. (15.5-56.8)"
-                            required>
+                        <input type="number" step="0.1" id="IMC" name="IMC" placeholder="Ind. Mas. (15-56)" min="15"
+                            max="56" required>
                     </div>
                 </div>
 
@@ -191,17 +193,20 @@
                 <div class="columna-inputs">
                     <div class="input-container">
                         <label for="PAD">Presión Diastólica (PAD)</label>
-                        <input type="number" id="PAD" name="PAD" placeholder="Pre. Dia. (48-143)" required>
+                        <input type="number" id="PAD" name="PAD" placeholder="Pre. Dia. (48-143)" min="48" max="143"
+                            required>
                     </div>
 
                     <div class="input-container">
                         <label for="FC">Frecuencia Cardíaca (FC)</label>
-                        <input type="number" id="FC" name="FC" placeholder="Latidos por minuto (44-143)" required>
+                        <input type="number" id="FC" name="FC" placeholder="Latidos por minuto (44-143)" min="44"
+                            max="143" required>
                     </div>
 
                     <div class="input-container">
                         <label for="Glucosa">Glucosa (mg/dL)</label>
-                        <input type="number" id="Glucosa" name="Glucosa" placeholder="Niv. glucosa (40-394)" required>
+                        <input type="number" id="Glucosa" name="Glucosa" placeholder="Niv. glucosa (40-394)" min="40"
+                            max="394" required>
                     </div>
                 </div>
             </div>
@@ -325,26 +330,7 @@
             manejarFumador();
 
 
-            form.addEventListener("submit", function (event) {
-                // Evita el scroll automático que hace el formulario al enviarse
-                event.preventDefault();
 
-                // Simula el envío del formulario (si usas AJAX o Flask lo manejará igual)
-                this.submit();
-
-                // Solo haz scroll si hay resultados (cuando "prediccion" existe)
-                if (document.querySelector(".resultado-container")) {
-                    setTimeout(function () {
-                        const recomendaciones = document.querySelector(".recomendaciones-container");
-                        if (recomendaciones) {
-                            recomendaciones.scrollIntoView({
-                                behavior: "smooth", // Desplazamiento suave
-                                block: "start"      // Alinea el elemento al inicio de la pantalla
-                            });
-                        }
-                    }, 500); // Pequeño retraso para asegurar que los resultados se hayan cargado
-                }
-            });
 
         });
 
