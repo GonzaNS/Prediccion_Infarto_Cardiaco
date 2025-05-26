@@ -13,7 +13,6 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.units import inch
-from twilio.rest import Client
 
 import os
 
@@ -79,11 +78,12 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-#Generar PDF
+# Generar PDF
+
 
 def generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo):
     pdf_path = f"static/{nombre_archivo}.pdf"
-    
+
     # Definir el documento
     doc = SimpleDocTemplate(pdf_path, pagesize=letter)
     Story = []
@@ -92,9 +92,10 @@ def generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo):
     styles = getSampleStyleSheet()
     title_style = styles['Title']
     normal_style = styles['Normal']
-    
+
     # Añadir el título
-    Story.append(Paragraph("Evaluación Predictiva de Enfermedad Cardiovascular", title_style))
+    Story.append(
+        Paragraph("Evaluación Predictiva de Enfermedad Cardiovascular", title_style))
     Story.append(Spacer(1, 0.5 * inch))
 
     # Predicción y probabilidad
@@ -107,9 +108,10 @@ def generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo):
     Story.append(Spacer(1, 0.5 * inch))
 
     # Recomendaciones
-    Story.append(Paragraph("<b>Recomendaciones para mejorar tu salud cardíaca:</b>", normal_style))
+    Story.append(Paragraph(
+        "<b>Recomendaciones para mejorar tu salud cardíaca:</b>", normal_style))
     Story.append(Spacer(1, 0.25 * inch))
-    
+
     for recomendacion in recomendaciones:
         Story.append(Paragraph(f"• {recomendacion}", normal_style))
         Story.append(Spacer(1, 0.2 * inch))
@@ -117,6 +119,7 @@ def generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo):
     # Crear el PDF
     doc.build(Story)
     return pdf_path
+
 
 @app.route('/enviar_correo', methods=['POST'])
 def enviar_correo():
@@ -141,10 +144,11 @@ def enviar_correo():
             "Controla tu presión arterial, colesterol y glucosa.",
             "No olvides tu chequeo médico anual."
         ]
-    
+
     # Generar PDF
     nombre_archivo_pdf = f"recomendaciones_{email_destino}"
-    pdf_path = generar_pdf(resultado, probabilidad, recomendaciones, nombre_archivo_pdf)
+    pdf_path = generar_pdf(resultado, probabilidad,
+                           recomendaciones, nombre_archivo_pdf)
 
     # Correo de Gmail
     remitente = 'gustavorpd04@gmail.com'  # Cambia por tu correo
@@ -177,7 +181,8 @@ def enviar_correo():
         part = MIMEBase("application", "octet-stream")
         part.set_payload(archivo_pdf.read())
         encoders.encode_base64(part)
-        part.add_header("Content-Disposition", f"attachment; filename={nombre_archivo_pdf}.pdf")
+        part.add_header("Content-Disposition",
+                        f"attachment; filename={nombre_archivo_pdf}.pdf")
         mensaje.attach(part)
 
     # Enviar el correo
@@ -196,6 +201,7 @@ def enviar_correo():
         os.remove(pdf_path)
 
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
